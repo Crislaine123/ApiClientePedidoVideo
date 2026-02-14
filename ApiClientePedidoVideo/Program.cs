@@ -32,8 +32,7 @@ builder.Services.AddAutoMapper(cfg => { }, typeof(MappingProfile));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
@@ -43,7 +42,7 @@ if (app.Environment.IsDevelopment())
 
     app.MapScalarApiReference();
     app.MapOpenApi();
-}
+
 
 //app.UseHttpsRedirection();
 
