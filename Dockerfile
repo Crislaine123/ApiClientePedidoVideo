@@ -1,21 +1,22 @@
-# Runtime .NET 10 (preview)
+# Runtime
 FROM mcr.microsoft.com/dotnet/aspnet:10.0-preview AS base
 WORKDIR /app
 EXPOSE 8080
 
-# Build .NET 10 (preview)
+# Build
 FROM mcr.microsoft.com/dotnet/sdk:10.0-preview AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
-# Copia csproj e restaura
-COPY ["ApiClientePedidoVideo.csproj", "./"]
-RUN dotnet restore "ApiClientePedidoVideo.csproj"
+# Copia o csproj (COM CAMINHO)
+COPY ["ApiClientePedidoVideo/ApiClientePedidoVideo.csproj", "ApiClientePedidoVideo/"]
+RUN dotnet restore "ApiClientePedidoVideo/ApiClientePedidoVideo.csproj"
 
 # Copia tudo
 COPY . .
 
 # Build
+WORKDIR /src/ApiClientePedidoVideo
 RUN dotnet build "ApiClientePedidoVideo.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # Publish
