@@ -24,7 +24,7 @@ FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "ApiClientePedidoVideo.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
-# Imagem fina
+# Imagem fin
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
